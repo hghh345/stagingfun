@@ -1,7 +1,9 @@
+The funfunfun.shop html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FUNFUNFUN.WORLD</title>
@@ -58,8 +60,676 @@ body {
 
 marquee { width: 100%; }
 
-.hidden { display:none; }
+.desktop {
+  min-height: 100vh;
+  padding: 48px 16px 80px;
+  position: relative;
+}
 
+.desktop-icons {
+  display: grid;
+  grid-template-columns: repeat(2, 92px);
+  gap: 18px;
+  width: 210px;
+  position: relative;
+  z-index: 20;
+}
+
+.desktop-icon {
+  width: 86px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px #000;
+  font-size: 12px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.icon-img {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 5px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  filter: drop-shadow(2px 2px 0 #222);
+}
+
+.desktop-icon:hover .label {
+  background: #000080;
+  outline: 1px dotted white;
+}
+
+.window {
+  position: absolute;
+  background: #c0c0c0;
+  border: 3px outset #fff;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.35);
+  min-width: 280px;
+  max-width: calc(100vw - 20px);
+  z-index: 100;
+}
+
+.window-titlebar {
+  background: linear-gradient(90deg, #000080, #3b5cff);
+  color: white;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 5px 3px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  user-select: none;
+  cursor: move;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 3px;
+}
+
+.win-btn {
+  width: 20px;
+  height: 20px;
+  border: 2px outset white;
+  background: #c0c0c0;
+  font-size: 12px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.window-menu {
+  height: 24px;
+  background: #c0c0c0;
+  border-bottom: 2px ridge #e8e8e8;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.window-content {
+  padding: 12px;
+  background: #ececec;
+  border: 2px inset #fff;
+  margin: 4px;
+}
+
+.paint-window {
+  top: 70px;
+  left: 210px;
+  width: 640px;
+}
+
+.paint-layout {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 8px;
+}
+
+.toolbox {
+  display: grid;
+  grid-template-columns: repeat(2, 22px);
+  gap: 3px;
+  align-content: start;
+}
+
+.tool {
+  height: 24px;
+  background: #d0d0d0;
+  border: 2px outset white;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tool.active-tool {
+  border: 2px inset white;
+  background: #fff;
+}
+
+.canvas-wrap {
+  background: white;
+  border: 2px inset #777;
+  min-height: 340px;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 340px;
+  background: white;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.paint-bottom {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  max-width: 430px;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border: 2px outset white;
+  cursor: pointer;
+}
+
+.swatch.active {
+  outline: 2px dotted #000;
+  outline-offset: 2px;
+}
+
+.tiny-btn {
+  background: #c0c0c0;
+  border: 2px outset white;
+  padding: 5px 8px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mirror-window {
+  top: 55px;
+  left: 58%;
+  transform: translateX(-50%);
+  width: 500px;
+  z-index: 120;
+}
+.mirror-card {
+  background: white;
+  border: 2px inset #aaa;
+  padding: 14px;
+  text-align: center;
+}
+
+.mirror-photo-wrap {
+  width: 280px;
+  height: 3600px;
+  margin: 0 auto 12px;
+  border: 10px ridge #dcdcdc;
+  border-radius: 18px 18px 55px 55px;
+  overflow: hidden;
+  position: relative;
+  background: white;
+  box-shadow:
+    0 0 18px rgba(255,0,200,.55),
+    8px 8px 0 rgba(0,0,0,.2);
+}
+
+.mirror-photo-wrap {
+  width: 240px;
+  height: 310px;
+  margin: 24px auto 12px;
+  border: 10px ridge #dcdcdc;
+  border-radius: 18px 18px 55px 55px;
+  overflow: visible;
+  position: relative;
+  background: white;
+  box-shadow:
+    0 0 18px rgba(255,0,200,.55),
+    8px 8px 0 rgba(0,0,0,.2);
+}
+
+.mirror-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px 8px 42px 42px;
+}
+
+.mirror-photo-wrap::before {
+  content: "MS PAINT MIRROR";
+  position: absolute;
+  top: -24px;
+  left: 18px;
+  background: #ff66cc;
+  color: white;
+  transform: rotate(-8deg);
+  font-weight: bold;
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 2px outset white;
+  z-index: 5;
+  white-space: nowrap;
+}
+  .mirror-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mirror-option {
+  background: #f8f8f8;
+  border: 2px inset #aaa;
+  padding: 10px;
+  text-align: center;
+}
+
+.mirror-option h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.mirror-option p {
+  margin: 0 0 6px;
+  font-size: 12px;
+}
+
+.mirror-option.featured {
+  background: #fff4fb;
+  box-shadow: inset 0 0 0 2px #ff66cc;
+}
+
+.mirror-option .price {
+  font-size: 22px;
+}
+
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  width: 28px;
+  height: 34px;
+  background: #c0c0c0;
+  border: 2px outset white;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.gallery-btn.prev {
+  left: -16px;
+}
+
+.gallery-btn.next {
+  right: -16px;
+}
+
+.price {
+  font-size: 26px;
+  color: #000080;
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+.buy-btn {
+  display: inline-block;
+  background: #ff00aa;
+  color: white;
+  text-decoration: none;
+  border: 3px outset #ffc7ef;
+  padding: 10px 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.buy-btn:hover { background: #00a651; }
+
+.folder-window {
+  top: 455px;
+  left: 240px;
+  width: 430px;
+}
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  text-align: center;
+}
+
+.folder-item {
+  background: #fff;
+  border: 2px inset #aaa;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.folder-emoji {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.note-window {
+  top: 500px;
+  right: 120px;
+  width: 290px;
+  transform: rotate(-5deg);
+}
+
+.sticky {
+  background: #fffaa8;
+  padding: 16px;
+  min-height: 210px;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.donation-window {
+  top: 400px;
+  left: 35px;
+  width: 330px;
+}
+
+.donation-window .window-titlebar {
+  background: linear-gradient(90deg, #7b007b, #ff00aa);
+}
+
+.shipping-window {
+  top: 610px;
+  left: 42px;
+  width: 300px;
+}
+
+.cd-window {
+  top: 220px;
+  right: 40px;
+  width: 260px;
+  z-index: 90;
+  transform: rotate(-2deg);
+}
+
+.cd-disc {
+  font-size: 86px;
+  text-align: center;
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+.shipping-list {
+  padding-left: 18px;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+.popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(390px, calc(100vw - 30px));
+  background: #c0c0c0;
+  border: 3px outset white;
+  z-index: 6000;
+  box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+}
+
+.popup-content {
+  padding: 16px;
+  background: #ececec;
+  margin: 4px;
+  border: 2px inset white;
+  font-size: 14px;
+}
+
+.popup-actions {
+  text-align: right;
+  margin-top: 14px;
+}
+
+.hidden { display: none; }
+
+.start-menu {
+  position: fixed;
+  left: 4px;
+  bottom: 42px;
+  width: 230px;
+  background: #c0c0c0;
+  border: 3px outset white;
+  z-index: 5000;
+  box-shadow: 5px 5px 0 rgba(0,0,0,.35);
+}
+
+.start-menu-header {
+  background: linear-gradient(#000080, #3b5cff);
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  height: 220px;
+  float: left;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.start-menu-items {
+  margin-left: 42px;
+  padding: 8px;
+}
+
+.start-menu-item {
+  padding: 8px;
+  border-bottom: 1px solid #999;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.start-menu-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.trash {
+  position: absolute;
+  right: 54px;
+  top: 76px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px #000;
+  font-size: 12px;
+}
+
+.trash-icon {
+  font-size: 58px;
+  filter: drop-shadow(2px 2px 0 #111);
+}
+.minesweeper-window {
+  top: 120px;
+  right: 40px;
+  width: 310px;
+  z-index: 95;
+  transform: rotate(1deg);
+}
+
+.minesweeper-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #c0c0c0;
+  border: 2px inset white;
+  padding: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.minesweeper-board {
+  display: grid;
+  grid-template-columns: repeat(6, 38px);
+  gap: 3px;
+  justify-content: center;
+}
+
+.mine-cell {
+  width: 38px;
+  height: 38px;
+  background: #c0c0c0;
+  border: 3px outset white;
+  font-size: 18px;
+  font-weight: bold;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.mine-cell.revealed {
+  border: 2px inset white;
+  background: #f4f4f4;
+}
+
+.mine-cell.bad {
+  background: #ff66cc;
+}
+.clippy {
+  position: fixed;
+  right: 24px;
+  bottom: 72px;
+  background: #fffaa8;
+  border: 2px solid #111;
+  padding: 12px;
+  width: 220px;
+  z-index: 3500;
+  box-shadow: 4px 4px 0 rgba(0,0,0,.25);
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.clippy::before {
+  content: "📎";
+  font-size: 42px;
+  position: absolute;
+  left: -35px;
+  bottom: -10px;
+}
+
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  font-size: 16px;
+  animation: pop 700ms ease-out forwards;
+}
+
+@keyframes pop {
+  from { opacity: 1; transform: scale(0.7) translateY(0); }
+  to { opacity: 0; transform: scale(1.6) translateY(-18px); }
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  background: #c0c0c0;
+  border-top: 3px ridge #fff;
+  display: flex;
+  align-items: center;
+  z-index: 4000;
+  padding: 4px;
+  gap: 6px;
+}
+
+.start-button {
+  height: 30px;
+  min-width: 86px;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.task-pill {
+  height: 30px;
+  min-width: 120px;
+  max-width: 190px;
+  background: #d6d6d6;
+  border: 2px inset #fff;
+  padding: 5px 8px;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.clock {
+  margin-left: auto;
+  border: 2px inset #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  background: #d6d6d6;
+}
+
+@media (max-width: 800px) {
+  body { background-attachment: scroll; }
+
+  .desktop {
+    padding: 44px 10px 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .desktop-icons {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 8px;
+    order: 1;
+  }
+
+  .desktop-icon {
+    width: auto;
+    font-size: 11px;
+  }
+
+  .trash {
+    position: static;
+    order: 2;
+    width: 90px;
+  }
+
+  .window {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    transform: none !important;
+    order: 3;
+    box-shadow: 3px 3px 0 rgba(0,0,0,.3);
+  }
+
+  .paint-window { order: 0; }
+
+  .paint-layout { grid-template-columns: 1fr; }
+
+  .toolbox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  canvas { height: 300px; }
+
+  .folder-grid { grid-template-columns: 1fr; }
+
+  .task-pill { display: none; }
+}
 </style>
 </head>
 
@@ -69,143 +739,643 @@ marquee { width: 100%; }
 
 <div class="marquee-bar">
   <marquee scrollamount="6">
-    MIRROR MIRROR ON THE WALL ✦ FUNFUNFUN WORLD ✦ BUY THE MS PAINT MIRROR ✦
+    MIRROR MIRROR ON THE WALL — WHO'S THE PRETTIEST OF THEM ALL? ✦ ENTER THE FUNFUNFUN DESKTOP ✦ DRAW ON YOURSELF ✦ BUY THE MS PAINT MIRROR ✦ HAPPY PRIDE MONTH ✦
   </marquee>
 </div>
 
 <div class="desktop">
 
+<div class="desktop-icons">
+  <div class="desktop-icon" onclick="openWindow('paintWin')"><div class="icon-img">🎨</div><div class="label">MS Paint</div></div>
+  <div class="desktop-icon" onclick="openWindow('mirrorWin')"><div class="icon-img">🪞</div><div class="label">The Mirror</div></div>
+  <div class="desktop-icon" onclick="openWindow('donationWin')"><div class="icon-img">💚</div><div class="label">Donations</div></div>
+  <div class="desktop-icon" onclick="openWindow('folderWin')"><div class="icon-img">📁</div><div class="label">Shop Files</div></div>
+  <div class="desktop-icon" onclick="openWindow('shippingWin')"><div class="icon-img">📦</div><div class="label">Shipping</div></div>
+  <div class="desktop-icon" onclick="openWindow('cdWin')"><div class="icon-img">💿</div><div class="label">CD Player</div></div>
+  <div class="desktop-icon" onclick="openWindow('minesweeperWin')">
+  <div class="icon-img">💣</div>
+  <div class="label">minesweeper.exe</div>
+</div>
+  <div class="desktop-icon" onclick="window.open('https://www.instagram.com/funfunfun.world/', '_blank')"><div class="icon-img">🤠</div> <div class="label">MySpace</div>
+</div>
+</div>
+
+<div class="trash">
+  <div class="trash-icon">🗑️</div>
+  <div>Recycle Bin</div>
+</div>
+
+<section class="window paint-window hidden" id="paintWin">
+  <div class="window-titlebar">
+    <span>untitled - Paint</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'paintWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'paintWin')">×</button>
+    </div>
+  </div>
+  <div class="window-menu"><span>File</span><span>Edit</span><span>View</span><span>Image</span><span>Colors</span><span>Help</span></div>
+  <div class="window-content">
+    <div class="paint-layout">
+      <div class="toolbox">
+        <button class="tool active-tool" onclick="setTool('pen', this)">✎</button>
+        <button class="tool" onclick="setTool('eraser', this)">🧽</button>
+        <button class="tool" onclick="setTool('line', this)">╲</button>
+        <button class="tool" onclick="setTool('rect', this)">▭</button>
+        <button class="tool" onclick="setTool('oval', this)">○</button>
+        <button class="tool" onclick="setTool('heart', this)">♡</button>
+        <button class="tool" onclick="setTool('star', this)">☆</button>
+        <button class="tool" onclick="setTool('text', this)">A</button>
+      </div>
+
+      <div>
+        <div class="canvas-wrap">
+          <canvas id="paintCanvas"></canvas>
+        </div>
+
+        <div class="paint-bottom">
+          <div class="swatches" id="swatches"></div>
+          <button class="tiny-btn" onclick="clearCanvas()">Clear</button>
+          <button class="tiny-btn" onclick="downloadCanvas()">Save</button>
+          <label class="tiny-btn">Upload photo <input id="photoUpload" type="file" accept="image/*" hidden></label>
+        </div>
+
+        <p style="font-size:12px;margin:8px 0 0;">Upload a photo and doodle on it like it is 2002.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="window minesweeper-window hidden" id="minesweeperWin">
+  <div class="window-titlebar">
+    <span>minesweeper_but_make_it_fab.exe</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'minesweeperWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'minesweeperWin')">×</button>
+    </div>
+  </div>
+
+  <div class="window-menu">
+    <span>Game</span><span>Glitter</span><span>Help</span>
+  </div>
+
+  <div class="window-content">
+    <div class="minesweeper-top">
+      <span id="mineStatus">avoid bad vibes</span>
+      <button class="tiny-btn" onclick="startMinesweeper()">reset</button>
+    </div>
+
+    <div id="minesweeperBoard" class="minesweeper-board"></div>
+  </div>
+</section>
 <section class="window mirror-window" id="mirrorWin">
   <div class="window-titlebar">
     <span>the-coolest-object.exe</span>
     <div class="window-buttons">
-      <button class="win-btn" onclick="minimizeWindow(event,'mirrorWin')">_</button>
+      <button class="win-btn" onclick="minimizeWindow(event, 'mirrorWin')">_</button>
       <button class="win-btn">□</button>
-      <button class="win-btn" onclick="closeWindow(event,'mirrorWin')">×</button>
+      <button class="win-btn" onclick="closeWindow(event, 'mirrorWin')">×</button>
     </div>
   </div>
-
+  <div class="window-menu"><span>Shop</span><span>Info</span><span>Customize</span><span>Help</span></div>
   <div class="window-content">
     <div class="mirror-card">
-
-      <div class="mirror-photo-wrap">
-        <button class="gallery-btn prev" onclick="changeMirrorPhoto(-1)">‹</button>
-        <img id="mirrorPhoto" src="mirror1.JPG" class="mirror-photo">
-        <button class="gallery-btn next" onclick="changeMirrorPhoto(1)">›</button>
-      </div>
-
-      <h1>MS Paint Mirror</h1>
-
-      <div class="mirror-options">
-        <div class="mirror-option">
-          <h3>Mini Mirror</h3>
-          <button onclick="addToCart({id:'mirror-mini',name:'Mini Mirror',price:3500})">
-            ADD MINI
-          </button>
-        </div>
-
+<div class="mirror-photo-wrap">
+  <button class="gallery-btn prev" onclick="changeMirrorPhoto(-1)">‹</button>
+  <img id="mirrorPhoto" src="mirror1.JPG" class="mirror-photo">
+  <button class="gallery-btn next" onclick="changeMirrorPhoto(1)">›</button>
+</div>      
+      <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
+      <p style="font-size:13px;">
+For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
+    <div class="mirror-options">
+  <div class="mirror-option">
+    <h3>Mini Mirror</h3>
+    <p>30cm × 40cm</p>
+    <div class="price">€35</div>
+    <a class="buy-btn" href="https://buy.stripe.com/14AdR8deY4vD0o428M5gc0e" target="_blank">BUY MINI</a>
+  </div>
         <div class="mirror-option featured">
-          <h3>Big Mirror</h3>
-          <button onclick="addToCart({id:'mirror-big',name:'Big Mirror',price:5500})">
-            ADD BIG
-          </button>
-        </div>
-      </div>
-
+    <h3>Big Mirror</h3>
+    <p>40cm × 60cm</p>
+      <div class="price">€55</div>
+      <a class="buy-btn" href="https://buy.stripe.com/fZu28q1wgbY59YEdRu5gc0d" target="_blank">BUY BIG </a>
     </div>
+  </div>
+      <p style="font-size:12px;margin:8px 0 0;">+ €10 optional customization</p>
+</section>
+
+<section class="window cd-window" id="cdWin">
+  <div class="window-titlebar">
+    <span>CD Player</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'cdWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'cdWin')">×</button>
+    </div>
+  </div>
+  <div class="window-content" style="text-align:center;">
+    <div class="cd-disc">💿</div>
+    <p><strong>chamber_of_reflection.mp3</strong></p>
+    <button class="tiny-btn" onclick="playSong()">▶ Play / Pause</button>
+    <p style="font-size:11px;">An on theme anthem.</p>
+  </div>
+</section>
+
+<section class="window donation-window" id="donationWin">
+  <div class="window-titlebar">
+    <span>donation-folder.txt</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'donationWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'donationWin')">×</button>
+    </div>
+  </div>
+  <div class="window-menu"><span>File</span><span>Edit</span><span>Kindness</span></div>
+  <div class="window-content">
+    <h3 style="margin-top:0;">Donation</h3>
+    <p>A portion of proceeds from the MS Paint Mirror will be donated to For the Gworls, a fund that helps Black trans people pay for rent and medical procedures.</p>
+    <a class="buy-btn" href="https://www.instagram.com/p/DZDT8xNlESf/?img_index=1" target="_blank">VISIT FOR THE GWORLS</a>
+  </div>
+</section>
+
+<section class="window folder-window hidden" id="folderWin">
+  <div class="window-titlebar">
+    <span>FUNFUNFUN Shop Files</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'folderWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'folderWin')">×</button>
+    </div>
+  </div>
+  <div class="window-menu"><span>File</span><span>Edit</span><span>View</span><span>Our Favorites</span></div>
+  <div class="window-content">
+    <div class="folder-grid">
+      <div class="folder-item"><span class="folder-emoji">🪞</span><strong>MS Paint Mirror</strong><p>Main character object.</p></div>
+      <div class="folder-item"><span class="folder-emoji">👠</span><strong>Shoes</strong><p>Crocupines, button heels, the fun footwear archive.</p></div>
+      <div class="folder-item"><span class="folder-emoji">🔥</span><strong>Lighters</strong><p>Funfunfun lighters that you'll never lose again.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="window note-window" id="noteWin">
+  <div class="window-titlebar" style="background:linear-gradient(90deg,#ffcc00,#ff66cc);">
+    <span>sticky_note_from_the_universe</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'noteWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'noteWin')">×</button>
+    </div>
+  </div>
+  <div class="window-content" style="padding:0;">
+    <div class="sticky">
+      Dear internet traveler,<br><br>
+      Thank you for stepping into this tiny portal of fun. 
+      <br><br>xoxo,<br>FUNFUNFUN.WORLD
+    </div>
+  </div>
+</section>
+
+<section class="window shipping-window hidden" id="shippingWin">
+  <div class="window-titlebar">
+    <span>shipping_info.doc</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'shippingWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'shippingWin')">×</button>
+    </div>
+  </div>
+  <div class="window-menu"><span>File</span><span>Rates</span><span>Help</span></div>
+  <div class="window-content">
+    <h3 style="margin-top:0;">Shipping (Allow 7 business days for your order to ship)</h3>
+    <ul class="shipping-list">
+      <li>Lisbon pickup: free</li>
+      <li>EU shipping: €10</li>
+      <li>Non-EU shipping: €20</li>
+      <li>Customization: +€10</li>
+    </ul>
   </div>
 </section>
 
 </div>
 
-<button id="cart-button" style="position:fixed;top:20px;right:20px;z-index:9999;">
-Cart (<span id="cart-count">0</span>)
-</button>
+<div class="clippy" id="clippy">It looks like you're trying to become the dopest person on the internet.</div>
 
-<div id="cart-drawer" style="
-position:fixed;
-top:0;
-right:-400px;
-width:360px;
-height:100%;
-background:white;
-box-shadow:-2px 0 10px rgba(0,0,0,0.1);
-padding:20px;
-transition:0.3s;
-z-index:9998;
-overflow-y:auto;
-">
-
-  <h2>Your Cart</h2>
-  <div id="cart-items"></div>
-  <hr>
-  <p><strong>Total: €<span id="cart-total">0</span></strong></p>
-
-  <button style="width:100%;padding:12px;background:black;color:white;">
-    Checkout
-  </button>
+<div class="start-menu hidden" id="startMenu">
+  <div class="start-menu-header">FUNFUNFUN</div>
+  <div class="start-menu-items">
+    <div class="start-menu-item" onclick="openWindow('paintWin')">🎨 Open MS Paint</div>
+    <div class="start-menu-item" onclick="openWindow('mirrorWin')">🪞 Shop Mirror</div>
+    <div class="start-menu-item" onclick="openWindow('cdWin')">💿 CD Player</div>
+    <div class="start-menu-item" onclick="openWindow('donationWin')">💚 Donation Info</div>
+    <div class="start-menu-item" onclick="openWindow('shippingWin')">📦 Shipping</div>
+    <div class="start-menu-item" onclick="openWindow('minesweeperWin')">💣 Minesweeper</div>
+  </div>
 </div>
 
-<!-- ===== ALL JS CLEANED INTO ONE BLOCK ===== -->
+<div class="popup" id="welcomePopup">
+  <div class="window-titlebar">
+    <span>Welcome to FUNFUNFUN.WORLD</span>
+    <div class="window-buttons"><button class="win-btn" onclick="closePopup()">×</button></div>
+  </div>
+  <div class="popup-content">
+    <strong>You are entering a weird internet desktop universe.🌎 </strong>
+    <p>Click things. Move windows. Draw on the canvas. Upload a photo. Live La Vida Loca</p>
+    <div class="popup-actions"><button class="tiny-btn" onclick="closePopup()">ENTER</button></div>
+  </div>
+</div>
+
+<audio id="song" loop>
+  <source src="chamber.mp3" type="audio/mpeg">
+</audio>
+
+<div class="taskbar">
+  <button class="start-button" onclick="toggleStart()">💿 Start</button>
+  <div class="task-pill" onclick="openWindow('paintWin')">untitled - Paint</div>
+  <div class="task-pill" onclick="openWindow('mirrorWin')">MS Paint Mirror</div>
+  <div class="task-pill" onclick="openWindow('cdWin')">CD Player</div>
+  <div class="clock" id="clock">00:00</div>
+</div>
+
 <script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let zIndex = 100;
 
-const cartDrawer = document.getElementById("cart-drawer");
-const cartButton = document.getElementById("cart-button");
-const cartItemsEl = document.getElementById("cart-items");
-const cartCountEl = document.getElementById("cart-count");
-const cartTotalEl = document.getElementById("cart-total");
-
-// open cart
-cartButton.onclick = () => {
-  cartDrawer.style.right =
-    cartDrawer.style.right === "0px" ? "-400px" : "0px";
-};
-
-// add to cart
-function addToCart(product) {
-  const existing = cart.find(i => i.id === product.id);
-  if (existing) existing.qty++;
-  else cart.push({...product, qty:1});
-
-  saveCart();
-  renderCart();
+function bringToFront(el) {
+  zIndex++;
+  el.style.zIndex = zIndex;
 }
 
-function removeItem(id){
-  cart = cart.filter(i => i.id !== id);
-  saveCart();
-  renderCart();
+function openWindow(id) {
+  const el = document.getElementById(id);
+  el.classList.remove("hidden");
+  bringToFront(el);
+  document.getElementById("startMenu").classList.add("hidden");
+
+  if (id === "paintWin") {
+    setTimeout(resizeCanvas, 100);
+  }
+
+  if (window.innerWidth <= 800) {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }
 }
 
-function saveCart(){
-  localStorage.setItem("cart", JSON.stringify(cart));
+function closeWindow(event, id) {
+  event.stopPropagation();
+  document.getElementById(id).classList.add("hidden");
 }
 
-function renderCart(){
-  cartItemsEl.innerHTML = "";
-  let total = 0;
-  let count = 0;
+function minimizeWindow(event, id) {
+  event.stopPropagation();
+  document.getElementById(id).classList.add("hidden");
+}
 
-  cart.forEach(item=>{
-    total += item.price * item.qty;
-    count += item.qty;
+function closePopup() {
+  document.getElementById("welcomePopup").classList.add("hidden");
+}
 
-    cartItemsEl.innerHTML += `
-      <div>
-        <strong>${item.name}</strong><br>
-        €${(item.price/100).toFixed(2)} × ${item.qty}
-        <button onclick="removeItem('${item.id}')">x</button>
-      </div>
-    `;
+function toggleStart() {
+  document.getElementById("startMenu").classList.toggle("hidden");
+}
+
+document.querySelectorAll(".window").forEach(win => {
+  win.addEventListener("mousedown", () => bringToFront(win));
+
+  const bar = win.querySelector(".window-titlebar");
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  bar.addEventListener("mousedown", e => {
+    if (e.target.classList.contains("win-btn")) return;
+    isDragging = true;
+    offsetX = e.clientX - win.offsetLeft;
+    offsetY = e.clientY - win.offsetTop;
+    bringToFront(win);
   });
 
-  cartCountEl.textContent = count;
-  cartTotalEl.textContent = (total/100).toFixed(2);
+  document.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+    win.style.position = "absolute";
+    win.style.left = `${e.clientX - offsetX}px`;
+    win.style.top = `${e.clientY - offsetY}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+});
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+document.addEventListener("mousemove", e => {
+  if (Math.random() > 0.72) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.textContent = ["✦", "♡", "★", "✧"][Math.floor(Math.random() * 4)];
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top = e.clientY + "px";
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 700);
+  }
+});
+
+const clippyLines = [
+  "Did you know dolphins don't automatically breathe on their own?",
+  "Have you considered buying a mirror that looks like it escaped Windows XP?",
+  "Tip: upload a photo and give yourself funfunfun little doodles.",
+  "Warning: this object may cause compliments.",
+  "Mirror mirror on the wall... "
+];
+
+setInterval(() => {
+  document.getElementById("clippy").innerHTML =
+    clippyLines[Math.floor(Math.random() * clippyLines.length)];
+}, 5000);
+
+function playSong() {
+  const song = document.getElementById("song");
+  if (!song.querySelector("source").getAttribute("src")) {
+    alert("CD PLAYER");
+    return;
+  }
+
+  if (song.paused) song.play();
+  else song.pause();
+}
+  const mirrorPhotos = [
+  "mirror1.JPG",
+  "mirror5.JPG",
+  "mirror4.JPG",
+  "mirror2.JPG",
+  "mirror6.JPG" 
+];
+
+let currentMirrorPhoto = 0;
+
+function changeMirrorPhoto(direction) {
+  currentMirrorPhoto += direction;
+
+  if (currentMirrorPhoto < 0) {
+    currentMirrorPhoto = mirrorPhotos.length - 1;
+  }
+
+  if (currentMirrorPhoto >= mirrorPhotos.length) {
+    currentMirrorPhoto = 0;
+  }
+
+  document.getElementById("mirrorPhoto").src = mirrorPhotos[currentMirrorPhoto];
+}
+const canvas = document.getElementById("paintCanvas");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let currentColor = "#ff0000";
+let brushSize = 5;
+let currentTool = "pen";
+let startX = 0;
+let startY = 0;
+
+function setTool(tool, btn) {
+  currentTool = tool;
+  document.querySelectorAll(".tool").forEach(t => t.classList.remove("active-tool"));
+  btn.classList.add("active-tool");
 }
 
-renderCart();
+const colors = [
+  "#000000", "#ffffff", "#ff0000", "#ff7f00", "#ffff00", "#00a651",
+  "#00ffff", "#0000ff", "#8b00ff", "#ff00aa", "#ff69b4", "#8b4513",
+  "#55cdfc", "#f7a8b8",
+  "#e40303", "#ff8c00", "#ffed00", "#008026", "#24408e", "#732982",
+];
+
+const swatches = document.getElementById("swatches");
+
+colors.forEach(color => {
+  const swatch = document.createElement("button");
+  swatch.className = "swatch";
+  swatch.style.background = color;
+  swatch.onclick = () => {
+    currentColor = color;
+    document.querySelectorAll(".swatch").forEach(s => s.classList.remove("active"));
+    swatch.classList.add("active");
+  };
+  swatches.appendChild(swatch);
+});
+
+swatches.firstChild.classList.add("active");
+
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+
+  if (rect.width === 0 || rect.height === 0) return;
+
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+window.addEventListener("load", () => {
+  if (!document.getElementById("paintWin").classList.contains("hidden")) {
+    resizeCanvas();
+  }
+});
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const point = e.touches ? e.touches[0] : e;
+  return {
+    x: point.clientX - rect.left,
+    y: point.clientY - rect.top
+  };
+}
+
+function startDraw(e) {
+  e.preventDefault();
+  drawing = true;
+  const pos = getPos(e);
+  startX = pos.x;
+  startY = pos.y;
+
+  if (currentTool === "text") {
+    const text = prompt("Type your desktop prophecy:");
+    if (text) {
+      ctx.fillStyle = currentColor;
+      ctx.font = "24px Comic Sans MS";
+      ctx.fillText(text, pos.x, pos.y);
+    }
+    drawing = false;
+    return;
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+  if (!drawing) return;
+  e.preventDefault();
+
+  const pos = getPos(e);
+
+  if (currentTool === "pen" || currentTool === "eraser") {
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = currentTool === "eraser" ? "#ffffff" : currentColor;
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  }
+}
+
+function stopDraw(e) {
+  if (!drawing) return;
+  drawing = false;
+ctx.beginPath();
+  
+  const pos = e ? getPos(e.changedTouches ? e.changedTouches[0] : e) : { x: startX, y: startY };
+  const w = pos.x - startX;
+  const h = pos.y - startY;
+
+  ctx.strokeStyle = currentColor;
+  ctx.fillStyle = currentColor;
+  ctx.lineWidth = brushSize;
+
+
+  if (currentTool === "line") {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  }
+
+  if (currentTool === "rect") ctx.strokeRect(startX, startY, w, h);
+
+  if (currentTool === "oval") {
+    ctx.beginPath();
+    ctx.ellipse(startX + w / 2, startY + h / 2, Math.abs(w / 2), Math.abs(h / 2), 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  if (currentTool === "heart") {
+    ctx.font = "42px serif";
+    ctx.fillText("♡", startX, startY);
+  }
+
+  if (currentTool === "star") {
+    ctx.font = "42px serif";
+    ctx.fillText("☆", startX, startY);
+  }
+}
+
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+
+document.addEventListener("mouseup", stopDraw);
+
+canvas.addEventListener("touchstart", startDraw, { passive: false });
+canvas.addEventListener("touchmove", draw, { passive: false });
+
+document.addEventListener("touchend", stopDraw);
+function clearCanvas() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function downloadCanvas() {
+  const link = document.createElement("a");
+  link.download = "funfunfun-ms-paint-doodle.png";
+  link.href = canvas.toDataURL();
+  link.click();
+}
+
+document.getElementById("photoUpload").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      clearCanvas();
+      const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+      const x = canvas.width / 2 - img.width / 2 * scale;
+      const y = canvas.height / 2 - img.height / 2 * scale;
+      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+  const mineSymbols = ["💅", "✨", "🪞", "💖", "🌈", "💿", "👼", "🦋"];
+const badSymbols = ["🚩", "👎", "🧍‍♂️", "💀"];
+let mineGameOver = false;
+
+function startMinesweeper() {
+  const board = document.getElementById("minesweeperBoard");
+  const status = document.getElementById("mineStatus");
+
+  board.innerHTML = "";
+  status.textContent = "avoid bad vibes";
+  mineGameOver = false;
+
+  const totalCells = 36;
+  const badCells = new Set();
+
+  while (badCells.size < 6) {
+    badCells.add(Math.floor(Math.random() * totalCells));
+  }
+
+  for (let i = 0; i < totalCells; i++) {
+    const cell = document.createElement("button");
+    cell.className = "mine-cell";
+
+    const isBad = badCells.has(i);
+
+    cell.onclick = () => {
+      if (mineGameOver || cell.classList.contains("revealed")) return;
+
+      cell.classList.add("revealed");
+
+      if (isBad) {
+        cell.classList.add("bad");
+        cell.textContent = badSymbols[Math.floor(Math.random() * badSymbols.length)];
+        status.textContent = "ERROR: bad vibes detected";
+        mineGameOver = true;
+        revealAllBadCells();
+      } else {
+        cell.textContent = mineSymbols[Math.floor(Math.random() * mineSymbols.length)];
+        status.textContent = "safe. still iconic.";
+      }
+    };
+
+    cell.dataset.bad = isBad;
+    board.appendChild(cell);
+  }
+}
+
+function revealAllBadCells() {
+  document.querySelectorAll(".mine-cell").forEach(cell => {
+    if (cell.dataset.bad === "true") {
+      cell.classList.add("revealed", "bad");
+      cell.textContent = badSymbols[Math.floor(Math.random() * badSymbols.length)];
+    }
+  });
+}
+
+startMinesweeper();
 </script>
 
 </body>
 </html>
+
