@@ -2,6 +2,6 @@
   "name": "stagingfun",
   "version": "1.0.0",
   "dependencies": {
-    "stripe": "^18.3.0"
+    "stripe": "^14.0.0"
   }
 }
