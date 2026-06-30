@@ -209,7 +209,7 @@
   <h3>Your Cart</h3>
   <div id="cart-items"></div>
   <p><strong>Total: €<span id="cart-total">0</span></strong></p>
-  <button>Checkout</button>
+<button onclick="checkout()">Checkout</button>
 </div>
 
 <script>
@@ -221,7 +221,7 @@ document.getElementById("cart-button").onclick = () => {
   drawer.style.right = drawer.style.right === "0px" ? "-380px" : "0px";
 };
 
-function addToCart(item){
+function addToCart(item){ 
   const found = cart.find(i => i.id === item.id);
   if(found) found.qty++;
   else cart.push({...item, qty:1});
@@ -229,7 +229,30 @@ function addToCart(item){
   localStorage.setItem("cart", JSON.stringify(cart));
   render();
 }
+async function checkout() {
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      items: cart.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.qty
+      }))
+    })
+  });
 
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Checkout failed");
+    console.log(data);
+  }
+}
 function render(){
   let total = 0;
   let count = 0;
