@@ -901,21 +901,9 @@ canvas {
 For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
     <div class="mirror-options">
   <div class="mirror-option">
-    <h3>Mini Mirror</h3>
-    <p>30cm × 40cm</p>
-    <div class="price">€35</div>
-<button onclick="addToCart({id:'mini-mirror', name:'Mini Mirror', price:3500, shippingType:'parcel'})">
-  Add Mini Mirror
-</button> 
   </div>
         <div class="mirror-option featured">
-    <h3>Big Mirror</h3>
-    <p>40cm × 60cm</p>
-      <div class="price">€55</div>
-    <button onclick="addToCart({id:'big-mirror', name:'Big Mirror', price:5500, shippingType:'parcel'})">
-  Add Big Mirror
-</button>
-  </div>
+      </div>
       <p style="font-size:12px;margin:8px 0 0;">+ €10 optional customization</p>
 </section>
 
@@ -1066,7 +1054,55 @@ For the OG internet Tumblr babes. The color palette at the bottom of the mirror 
       
 <script>
 let zIndex = 100;
+const PRODUCTS = [
+  {
+    id: "ms-mirror",
+    name: "MS Paint Mirror",
+    image: "mirror1.JPG",
+    variants: [
+      { id: "tiny", label: "Tiny", price: 1500 },
+      { id: "mini", label: "Mini", price: 3500 },
+      { id: "big", label: "Big", price: 5500 },
+      { id: "palestine", label: "Big (Palestine Edition)", price: 6500 }
+    ]
+  },
+  {
+    id: "ipod-mirror",
+    name: "iPod Nano Mirror",
+    image: "ipod.JPG",
+    variants: [
+      { id: "standard", label: "Standard", price: 3500 }
+    ]
+  }
+];
+function renderProducts() {
+  const container = document.querySelector(".mirror-options");
+  if (!container) return;
 
+  container.innerHTML = "";
+
+  PRODUCTS.forEach(product => {
+    const card = document.createElement("div");
+    card.className = "mirror-option";
+
+    let variantButtons = "";
+
+    product.variants.forEach(v => {
+      variantButtons += `
+        <button onclick="addVariantToCart('${product.id}', '${v.id}')">
+          ${v.label} — €${(v.price / 100).toFixed(2)}
+        </button>
+      `;
+    });
+
+    card.innerHTML = `
+      <h3>${product.name}</h3>
+      ${variantButtons}
+    `;
+
+    container.appendChild(card);
+  });
+}
 function bringToFront(el) {
   zIndex++;
   el.style.zIndex = zIndex;
@@ -1450,10 +1486,21 @@ document.getElementById("cart-button").onclick = () => {
 };
 
 /* ADD ITEM */
-function addToCart(item){
+function addVariantToCart(productId, variantId){
+  const product = PRODUCTS.find(p => p.id === productId);
+  const variant = product.variants.find(v => v.id === variantId);
+
+  const item = {
+    id: `${productId}-${variantId}`,
+    name: `${product.name} (${variant.label})`,
+    price: variant.price
+  };
+
   const found = cart.find(i => i.id === item.id);
+
   if(found) found.qty++;
   else cart.push({...item, qty:1});
+
   save();
 }
 
