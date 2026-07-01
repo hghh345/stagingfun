@@ -899,7 +899,7 @@ canvas {
       <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
       <p style="font-size:13px;">
 For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
-    <div class="mirror-options"></div>
+<div id="productContainer"></div>
   <div class="mirror-option">
   </div>
         <div class="mirror-option featured">
@@ -1102,26 +1102,26 @@ const PRODUCTS = [
 ];
 
 function renderProducts() {
-  const container = document.querySelector(".folder-grid");
+  const container = document.getElementById("productContainer");
   if (!container) return;
 
   container.innerHTML = "";
 
   PRODUCTS.forEach(product => {
-    const item = document.createElement("div");
-    item.className = "folder-item";
+    const block = document.createElement("div");
+    block.className = "mirror-option featured";
 
-    item.innerHTML = `
-      <span class="folder-emoji">🪞</span>
-      <strong>${product.name}</strong>
-      <p>${product.variants.length} versions</p>
+    block.innerHTML = `
+      <h3>${product.name}</h3>
+      <p>${product.variants.length} versions available</p>
+      <button class="tiny-btn">Open</button>
     `;
 
-    item.onclick = () => {
+    block.querySelector("button").onclick = () => {
       openProductWindow(product.id, product.variants[0].id);
     };
 
-    container.appendChild(item);
+    container.appendChild(block);
   });
 }
 function bringToFront(el) {
