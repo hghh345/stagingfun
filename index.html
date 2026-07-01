@@ -230,33 +230,41 @@ function addToCart(item){
   render();
 }
 async function checkout() {
-  const res = await fetch("/api/checkout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      items: cart.map(item => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.qty
-      }))
-    })
-  });
-async function checkout() {
   const btn = document.querySelector("#cart-drawer button");
   btn.textContent = "Redirecting...";
   btn.disabled = true;
-  const data = await res.json();
-  btn.textContent = "Checkout";
-btn.disabled = false;
 
-  if (data.url) {
-    window.location.href = data.url;
-  } else {
-    alert("Checkout failed");
-    console.log(data);
+  try {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        items: cart.map(item => ({
+          name: item.name,
+          price: item.price,
+          quantity: item.qty
+        }))
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Checkout failed");
+      console.log(data);
+    }
+
+  } catch (err) {
+    console.log(err);
+    alert("Checkout error");
   }
+
+  btn.textContent = "Checkout";
+  btn.disabled = false;
 }
 function render() {
   let total = 0;
