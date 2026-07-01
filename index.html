@@ -1505,16 +1505,25 @@ function render(){
 }
 
 async function checkout(){
+  // Validate cart before checkout
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  // Prepare items with guaranteed quantity
+  const items = cart.map(i => ({
+    name: i.name,
+    price: Math.round(i.price), // Ensure it's a number
+    qty: parseInt(i.qty) || 1   // Ensure qty is a number
+  }));
+
+  console.log("Sending to checkout:", items); // Debug log
+
   const res = await fetch("/api/checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      items: cart.map(i => ({
-        name: i.name,
-        price: i.price,
-        quantity: i.qty
-      }))
-    })
+    body: JSON.stringify({ items })
   });
 
   const data = await res.json();
@@ -1522,7 +1531,7 @@ async function checkout(){
   if(data.url){
     window.location.href = data.url;
   } else {
-    alert("Checkout error");
+    alert("Checkout error: " + (data.error || "Unknown error"));
     console.log(data);
   }
 }
