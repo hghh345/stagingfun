@@ -1,152 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FUNFUNFUN.WORLD</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FUNFUNFUN.WORLD</title>
 
-<link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+  * { box-sizing: border-box; }
 
-html, body {
-margin: 0;
-min-height: 100%;
-font-family: Tahoma, Verdana, Arial, sans-serif;
-overflow-x: hidden;
-}
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    overflow-x: hidden;
+  }
 
-body {
-background:
-linear-gradient(rgba(0, 70, 255, 0.08), rgba(255, 0, 180, 0.07)),
-url("windows.jpg");
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-color: #111;
-}
+  body {
+    background:
+      linear-gradient(rgba(0, 70, 255, 0.08), rgba(255, 0, 180, 0.07)),
+      url("windows.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #111;
+  }
 
-.scanlines {
-position: fixed;
-inset: 0;
-pointer-events: none;
-background: repeating-linear-gradient(
-to bottom,
-rgba(255,255,255,0.05),
-rgba(255,255,255,0.05) 1px,
-rgba(0,0,0,0.04) 2px,
-rgba(0,0,0,0.04) 3px
-);
-z-index: 9999;
-}
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.05) 1px,
+      rgba(0,0,0,0.04) 2px,
+      rgba(0,0,0,0.04) 3px
+    );
+    z-index: 9999;
+  }
 
-.marquee-bar {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background: #000080;
-color: white;
-height: 32px;
-display: flex;
-align-items: center;
-z-index: 3000;
-font-weight: bold;
-font-size: 14px;
-}
+  .marquee-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #000080;
+    color: white;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    z-index: 3000;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-marquee { width: 100%; }
+  marquee { width: 100%; }
 
-.desktop {
-min-height: 100vh;
-padding: 60px 16px 100px;
-}
+  .desktop {
+    min-height: 100vh;
+    padding: 60px 16px 100px;
+  }
 
-.window {
-position: absolute;
-background: #c0c0c0;
-border: 3px outset #fff;
-box-shadow: 5px 5px 0 rgba(0,0,0,0.35);
-width: 500px;
-}
+  .window {
+    position: absolute;
+    background: #c0c0c0;
+    border: 3px outset #fff;
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.35);
+    width: 500px;
+  }
 
-.window-titlebar {
-background: #000080;
-color: white;
-padding: 4px 8px;
-display: flex;
-justify-content: space-between;
-font-weight: bold;
-}
+  .window-titlebar {
+    background: #000080;
+    color: white;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
 
-.window-content {
-background: #ececec;
-margin: 4px;
-padding: 12px;
-}
+  .window-content {
+    background: #ececec;
+    margin: 4px;
+    padding: 12px;
+  }
 
   /* ✅ FIXED MIRROR (THIS WAS YOUR ISSUE) */
-.mirror-photo-wrap {
-width: 240px;
+  .mirror-photo-wrap {
+    width: 240px;
     height: 310px; /* FIXED */
-    height: 310px;
-margin: 20px auto;
-border: 10px ridge #ddd;
-border-radius: 18px 18px 55px 55px;
-overflow: hidden;
-background: white;
-}
+    margin: 20px auto;
+    border: 10px ridge #ddd;
+    border-radius: 18px 18px 55px 55px;
+    overflow: hidden;
+    background: white;
+  }
 
-.mirror-photo {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
+  .mirror-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-.mirror-options {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-margin-top: 10px;
-}
+  .mirror-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
 
-.mirror-option {
-background: white;
-border: 2px inset #aaa;
-padding: 10px;
-text-align: center;
-}
+  .mirror-option {
+    background: white;
+    border: 2px inset #aaa;
+    padding: 10px;
+    text-align: center;
+  }
 
-.mirror-option.featured {
-border: 2px solid #ff66cc;
-}
+  .mirror-option.featured {
+    border: 2px solid #ff66cc;
+  }
 
-button {
-cursor: pointer;
-}
+  button {
+    cursor: pointer;
+  }
 
   /* CART */
-#cart-button {
-position: fixed;
-top: 20px;
-right: 20px;
-z-index: 9999;
-}
+  #cart-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
 
-#cart-drawer {
-position: fixed;
-top: 0;
-right: -380px;
-width: 360px;
-height: 100%;
-background: white;
-transition: 0.3s;
-z-index: 9998;
-padding: 20px;
-}
-</style>
+  #cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 360px;
+    height: 100%;
+    background: white;
+    transition: 0.3s;
+    z-index: 9998;
+    padding: 20px;
+  }
+  </style>
 </head>
 
 <body>
@@ -154,52 +153,52 @@ padding: 20px;
 <div class="scanlines"></div>
 
 <div class="marquee-bar">
-<marquee>
-FUNFUNFUN WORLD ✦ MS PAINT MIRROR ✦ SHOP SMALL INTERNET ART ✦
-</marquee>
+  <marquee>
+    FUNFUNFUN WORLD ✦ MS PAINT MIRROR ✦ SHOP SMALL INTERNET ART ✦
+  </marquee>
 </div>
 
 <div class="desktop">
 
   <!-- MIRROR WINDOW -->
-<section class="window" id="mirrorWin" style="top:80px;left:50%;">
-<div class="window-titlebar">
-<span>MS Paint Mirror</span>
-<span>×</span>
-</div>
+  <section class="window" id="mirrorWin" style="top:80px;left:50%;">
+    <div class="window-titlebar">
+      <span>MS Paint Mirror</span>
+      <span>×</span>
+    </div>
 
-<div class="window-content">
+    <div class="window-content">
 
-<div class="mirror-photo-wrap">
-<img id="mirrorPhoto" class="mirror-photo" src="mirror1.JPG">
-</div>
+      <div class="mirror-photo-wrap">
+        <img id="mirrorPhoto" class="mirror-photo" src="mirror1.JPG">
+      </div>
 
-<h2>MS Paint Mirror</h2>
+      <h2>MS Paint Mirror</h2>
 
-<div class="mirror-options">
+      <div class="mirror-options">
 
-<div class="mirror-option">
-<h3>Mini</h3>
-<button onclick="addToCart({
-           id:'mini',
-           name:'Mini Mirror',
-           price:3500
-         })">Add €35</button>
-</div>
+        <div class="mirror-option">
+          <h3>Mini</h3>
+          <button onclick="addToCart({
+            id:'mini',
+            name:'Mini Mirror',
+            price:3500
+          })">Add €35</button>
+        </div>
 
-<div class="mirror-option featured">
-<h3>Big</h3>
-<button onclick="addToCart({
-           id:'big',
-           name:'Big Mirror',
-           price:5500
-         })">Add €55</button>
-</div>
+        <div class="mirror-option featured">
+          <h3>Big</h3>
+          <button onclick="addToCart({
+            id:'big',
+            name:'Big Mirror',
+            price:5500
+          })">Add €55</button>
+        </div>
 
-</div>
+      </div>
 
-</div>
-</section>
+    </div>
+  </section>
 
 </div>
 
@@ -207,11 +206,10 @@ FUNFUNFUN WORLD ✦ MS PAINT MIRROR ✦ SHOP SMALL INTERNET ART ✦
 <button id="cart-button">Cart (<span id="cart-count">0</span>)</button>
 
 <div id="cart-drawer">
-<h3>Your Cart</h3>
-<div id="cart-items"></div>
-<p><strong>Total: €<span id="cart-total">0</span></strong></p>
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <p><strong>Total: €<span id="cart-total">0</span></strong></p>
 <button onclick="checkout()">Checkout</button>
-  <button onclick="checkout()">Checkout</button>
 </div>
 
 <script>
@@ -220,111 +218,61 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const drawer = document.getElementById("cart-drawer");
 
 document.getElementById("cart-button").onclick = () => {
-drawer.style.right = drawer.style.right === "0px" ? "-380px" : "0px";
+  drawer.style.right = drawer.style.right === "0px" ? "-380px" : "0px";
 };
 
 function addToCart(item){ 
-const found = cart.find(i => i.id === item.id);
-if(found) found.qty++;
-else cart.push({...item, qty:1});
+  const found = cart.find(i => i.id === item.id);
+  if(found) found.qty++;
+  else cart.push({...item, qty:1});
 
-localStorage.setItem("cart", JSON.stringify(cart));
-render();
+  localStorage.setItem("cart", JSON.stringify(cart));
+  render();
 }
-
 async function checkout() {
-const btn = document.querySelector("#cart-drawer button");
-btn.textContent = "Redirecting...";
-btn.disabled = true;
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      items: cart.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.qty
+      }))
+    })
+  });
 
-try {
-const res = await fetch("/api/checkout", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
-items: cart.map(item => ({
-name: item.name,
-price: item.price,
-quantity: item.qty
-}))
-})
-});
+  const data = await res.json();
 
-const data = await res.json();
-
-if (data.url) {
-window.location.href = data.url;
-} else {
-alert("Checkout failed");
-console.log(data);
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Checkout failed");
+    console.log(data);
+  }
 }
+function render(){
+  let total = 0;
+  let count = 0;
 
-} catch (err) {
-console.log(err);
-alert("Checkout error");
-}
+  const el = document.getElementById("cart-items");
+  el.innerHTML = "";
 
-btn.textContent = "Checkout";
-btn.disabled = false;
-}
+  cart.forEach(i => {
+    total += i.price * i.qty;
+    count += i.qty;
 
-function render() {
-let total = 0;
-let count = 0;
+    el.innerHTML += `
+      <div>
+        ${i.name} - €${(i.price/100).toFixed(2)} x ${i.qty}
+      </div>
+    `;
+  });
 
-const el = document.getElementById("cart-items");
-el.innerHTML = "";
-
-cart.forEach((i, index) => {
-total += i.price * i.qty;
-count += i.qty;
-
-el.innerHTML += `
-     <div style="margin-bottom:10px;">
-       <div><strong>${i.name}</strong></div>
-
-       <div>€${(i.price / 100).toFixed(2)}</div>
-
-       <div style="display:flex; gap:8px; align-items:center; margin-top:5px;">
-          
-         <button onclick="changeQty(${index}, -1)">-</button>
-          
-         <span>${i.qty}</span>
-          
-         <button onclick="changeQty(${index}, 1)">+</button>
-
-          <button onclick="removeItem(${index})" style="margin-left:10px;">
-            remove
-          </button>
-
-          <button onclick="removeItem(${index})">remove</button>
-       </div>
-     </div>
-   `;
-});
-
-document.getElementById("cart-count").textContent = count;
-document.getElementById("cart-total").textContent = (total / 100).toFixed(2);
-}
-  function changeQty(index, delta) {
-
-function changeQty(index, delta) {
-cart[index].qty += delta;
-
-if (cart[index].qty <= 0) {
-cart.splice(index, 1);
-}
-
-localStorage.setItem("cart", JSON.stringify(cart));
-render();
-}
-
-function removeItem(index) {
-cart.splice(index, 1);
-localStorage.setItem("cart", JSON.stringify(cart));
-render();
+  document.getElementById("cart-count").textContent = count;
+  document.getElementById("cart-total").textContent = (total/100).toFixed(2);
 }
 
 render();
