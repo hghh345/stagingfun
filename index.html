@@ -86,10 +86,9 @@
     padding: 12px;
   }
 
-  /* ✅ FIXED MIRROR (THIS WAS YOUR ISSUE) */
   .mirror-photo-wrap {
     width: 240px;
-    height: 310px; /* FIXED */
+    height: 310px;
     margin: 20px auto;
     border: 10px ridge #ddd;
     border-radius: 18px 18px 55px 55px;
@@ -126,7 +125,6 @@
     cursor: pointer;
   }
 
-  /* CART */
   #cart-button {
     position: fixed;
     top: 20px;
@@ -160,7 +158,6 @@
 
 <div class="desktop">
 
-  <!-- MIRROR WINDOW -->
   <section class="window" id="mirrorWin" style="top:80px;left:50%;">
     <div class="window-titlebar">
       <span>MS Paint Mirror</span>
@@ -202,14 +199,13 @@
 
 </div>
 
-<!-- CART -->
 <button id="cart-button">Cart (<span id="cart-count">0</span>)</button>
 
 <div id="cart-drawer">
   <h3>Your Cart</h3>
   <div id="cart-items"></div>
   <p><strong>Total: €<span id="cart-total">0</span></strong></p>
-<button onclick="checkout()">Checkout</button>
+  <button onclick="checkout()">Checkout</button>
 </div>
 
 <script>
@@ -229,6 +225,7 @@ function addToCart(item){
   localStorage.setItem("cart", JSON.stringify(cart));
   render();
 }
+
 async function checkout() {
   const btn = document.querySelector("#cart-drawer button");
   btn.textContent = "Redirecting...";
@@ -266,6 +263,7 @@ async function checkout() {
   btn.textContent = "Checkout";
   btn.disabled = false;
 }
+
 function render() {
   let total = 0;
   let count = 0;
@@ -280,21 +278,13 @@ function render() {
     el.innerHTML += `
       <div style="margin-bottom:10px;">
         <div><strong>${i.name}</strong></div>
-
         <div>€${(i.price / 100).toFixed(2)}</div>
 
         <div style="display:flex; gap:8px; align-items:center; margin-top:5px;">
-          
           <button onclick="changeQty(${index}, -1)">-</button>
-          
           <span>${i.qty}</span>
-          
           <button onclick="changeQty(${index}, 1)">+</button>
-
-          <button onclick="removeItem(${index})" style="margin-left:10px;">
-            remove
-          </button>
-
+          <button onclick="removeItem(${index})">remove</button>
         </div>
       </div>
     `;
@@ -303,7 +293,8 @@ function render() {
   document.getElementById("cart-count").textContent = count;
   document.getElementById("cart-total").textContent = (total / 100).toFixed(2);
 }
-  function changeQty(index, delta) {
+
+function changeQty(index, delta) {
   cart[index].qty += delta;
 
   if (cart[index].qty <= 0) {
