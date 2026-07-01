@@ -899,7 +899,7 @@ canvas {
       <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
       <p style="font-size:13px;">
 For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
-    <div class="mirror-options">
+    <div class="mirror-options"></div>
   <div class="mirror-option">
   </div>
         <div class="mirror-option featured">
@@ -1060,10 +1060,30 @@ const PRODUCTS = [
     name: "MS Paint Mirror",
     image: "mirror1.JPG",
     variants: [
-      { id: "tiny", label: "Tiny", price: 1500 },
-      { id: "mini", label: "Mini", price: 3500 },
-      { id: "big", label: "Big", price: 5500 },
-      { id: "palestine", label: "Big (Palestine Edition)", price: 6500 }
+      {
+        id: "tiny",
+        label: "Tiny",
+        price: 1500,
+        description: "The smallest portal version. Pocket-sized energy, made for intimate spaces."
+      },
+      {
+        id: "mini",
+        label: "Mini",
+        price: 3500,
+        description: "The original compact MS Paint Mirror. Light, playful, and nostalgic."
+      },
+      {
+        id: "big",
+        label: "Big",
+        price: 5500,
+        description: "The full-size statement mirror. A main character object for any wall."
+      },
+      {
+        id: "palestine",
+        label: "Big (Palestine Edition)",
+        price: 6500,
+        description: "Special edition with meaning embedded in the object. Same mirror, different intention."
+      }
     ]
   },
   {
@@ -1071,29 +1091,40 @@ const PRODUCTS = [
     name: "iPod Nano Mirror",
     image: "ipod.JPG",
     variants: [
-      { id: "standard", label: "Standard", price: 3500 }
+      {
+        id: "standard",
+        label: "Standard",
+        price: 3500,
+        description: "A nostalgic iPod-shaped mirror object. Early internet energy in physical form."
+      }
     ]
   }
 ];
+
 function renderProducts() {
-  const container = document.querySelector(".mirror-options");
+  const container = document.querySelector(".folder-grid");
   if (!container) return;
 
   container.innerHTML = "";
 
   PRODUCTS.forEach(product => {
-    const card = document.createElement("div");
-    card.className = "mirror-option";
+    const item = document.createElement("div");
+    item.className = "folder-item";
 
-    let variantButtons = "";
+    item.innerHTML = `
+      <span class="folder-emoji">🪞</span>
+      <strong>${product.name}</strong>
+      <p>Open collection</p>
+    `;
 
-    product.variants.forEach(v => {
-      variantButtons += `
-        <button onclick="addVariantToCart('${product.id}', '${v.id}')">
-          ${v.label} — €${(v.price / 100).toFixed(2)}
-        </button>
-      `;
-    });
+    item.onclick = () => {
+      openWindow("mirrorWin");
+      openProductWindow(product.id, product.variants[0].id);
+    };
+
+    container.appendChild(item);
+  });
+}
 
     card.innerHTML = `
       <h3>${product.name}</h3>
@@ -1581,6 +1612,72 @@ async function checkout(){
     alert("Checkout error: " + (data.error || "Unknown error"));
     console.log(data);
   }
+}
+let activeProduct = null;
+let activeVariant = null;
+function openProductWindow(productId, variantId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  const variant = product.variants.find(v => v.id === variantId);
+
+  activeProduct = product;
+  activeVariant = variant;
+
+  let win = document.getElementById("productWin");
+
+  if (!win) {
+    win = document.createElement("section");
+    win.className = "window";
+    win.id = "productWin";
+    document.body.appendChild(win);
+  }
+
+  win.classList.remove("hidden");
+  bringToFront(win);
+
+  win.innerHTML = `
+    <div class="window-titlebar">
+      <span>${product.name}</span>
+      <div class="window-buttons">
+        <button class="win-btn" onclick="closeWindow(event, 'productWin')">×</button>
+      </div>
+    </div>
+
+    <div class="window-content">
+      <img src="${product.image}" style="width:100%; max-height:220px; object-fit:cover; border:2px inset #fff;" />
+
+      <h3>${product.name} — ${variant.label}</h3>
+
+      <p style="font-size:12px; line-height:1.4;">
+        ${variant.description}
+      </p>
+
+      <div style="font-size:18px; font-weight:bold; margin:10px 0;">
+        €${(variant.price / 100).toFixed(2)}
+      </div>
+
+      <button class="tiny-btn"
+        onclick="addVariantToCart('${product.id}', '${variant.id}')">
+        Add to cart
+      </button>
+    </div>
+  `;
+}
+function addVariantToCart(productId, variantId){
+  const product = PRODUCTS.find(p => p.id === productId);
+  const variant = product.variants.find(v => v.id === variantId);
+
+  const item = {
+    id: `${productId}-${variantId}`,
+    name: `${product.name} (${variant.label})`,
+    price: variant.price
+  };
+
+  const found = cart.find(i => i.id === item.id);
+
+  if(found) found.qty++;
+  else cart.push({...item, qty:1});
+
+  save();
 }
 
 /* INIT */
