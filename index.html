@@ -1114,24 +1114,14 @@ function renderProducts() {
     item.innerHTML = `
       <span class="folder-emoji">🪞</span>
       <strong>${product.name}</strong>
-      <p>Open collection</p>
+      <p>${product.variants.length} versions</p>
     `;
 
     item.onclick = () => {
-      openWindow("mirrorWin");
       openProductWindow(product.id, product.variants[0].id);
     };
 
     container.appendChild(item);
-  });
-}
-
-    card.innerHTML = `
-      <h3>${product.name}</h3>
-      ${variantButtons}
-    `;
-
-    container.appendChild(card);
   });
 }
 function bringToFront(el) {
@@ -1515,25 +1505,6 @@ document.getElementById("cart-button").onclick = () => {
   const d = document.getElementById("cart-drawer");
   d.style.right = (d.style.right === "0px") ? "-380px" : "0px";
 };
-
-/* ADD ITEM */
-function addVariantToCart(productId, variantId){
-  const product = PRODUCTS.find(p => p.id === productId);
-  const variant = product.variants.find(v => v.id === variantId);
-
-  const item = {
-    id: `${productId}-${variantId}`,
-    name: `${product.name} (${variant.label})`,
-    price: variant.price
-  };
-
-  const found = cart.find(i => i.id === item.id);
-
-  if(found) found.qty++;
-  else cart.push({...item, qty:1});
-
-  save();
-}
 
 /* SAVE */
 function save(){
