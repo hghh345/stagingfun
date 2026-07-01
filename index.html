@@ -27,6 +27,7 @@ body {
   color: #111;
 }
 
+/* scanlines */
 .scanlines {
   position: fixed;
   inset: 0;
@@ -41,12 +42,12 @@ body {
   z-index: 9999;
 }
 
+/* WINDOWS */
 .window {
   position: absolute;
   background: #c0c0c0;
   border: 3px outset #fff;
   box-shadow: 5px 5px 0 rgba(0,0,0,0.35);
-  width: 500px;
   z-index: 10;
 }
 
@@ -95,8 +96,6 @@ body {
   text-align: center;
 }
 
-button { cursor: pointer; }
-
 /* CART */
 #cart-button {
   position: fixed;
@@ -113,9 +112,28 @@ button { cursor: pointer; }
   height: 100%;
   background: white;
   transition: 0.3s;
-  padding: 20px;
   z-index: 9998;
+  padding: 20px;
 }
+
+/* folder + extras */
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.folder-item {
+  background: white;
+  border: 2px inset #aaa;
+  padding: 10px;
+  text-align: center;
+}
+
+button { cursor: pointer; }
+
+.hidden { display:none; }
+
 </style>
 </head>
 
@@ -123,11 +141,8 @@ button { cursor: pointer; }
 
 <div class="scanlines"></div>
 
-<!-- DESKTOP ICONS (restored placeholder for your full system) -->
-<div class="desktop-icons"></div>
-
-<!-- MIRROR -->
-<section class="window" style="top:80px;left:60px;">
+<!-- ================= MIRROR WINDOW ================= -->
+<section class="window" id="mirrorWin" style="top:80px;left:60px;width:520px;">
   <div class="window-titlebar">MS Paint Mirror</div>
 
   <div class="window-content">
@@ -155,7 +170,28 @@ button { cursor: pointer; }
   </div>
 </section>
 
-<!-- CART -->
+<!-- ================= FOLDER WINDOW ================= -->
+<section class="window" id="folderWin" style="top:120px;left:620px;width:420px;">
+  <div class="window-titlebar">Shop Files</div>
+  <div class="window-content">
+    <div class="folder-grid">
+      <div class="folder-item">🪞 Mirror</div>
+      <div class="folder-item">👠 Shoes</div>
+      <div class="folder-item">🔥 Lighters</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MINESWEEPER ================= -->
+<section class="window" id="mineWin" style="top:420px;left:60px;width:320px;">
+  <div class="window-titlebar">minesweeper.exe</div>
+  <div class="window-content">
+    <button onclick="startMinesweeper()">Reset</button>
+    <div id="board"></div>
+  </div>
+</section>
+
+<!-- ================= CART ================= -->
 <button id="cart-button">Cart (<span id="cart-count">0</span>)</button>
 
 <div id="cart-drawer">
@@ -168,68 +204,67 @@ button { cursor: pointer; }
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+/* CART OPEN */
 document.getElementById("cart-button").onclick = () => {
   const d = document.getElementById("cart-drawer");
   d.style.right = d.style.right === "0px" ? "-380px" : "0px";
 };
 
+/* ADD */
 function addToCart(item){
   const found = cart.find(i => i.id === item.id);
   if(found) found.qty++;
   else cart.push({...item, qty:1});
-
   save();
 }
 
+/* SAVE */
 function save(){
   localStorage.setItem("cart", JSON.stringify(cart));
   render();
 }
 
-function changeQty(index, delta){
-  cart[index].qty += delta;
-  if(cart[index].qty <= 0) cart.splice(index,1);
+/* QTY */
+function changeQty(i, d){
+  cart[i].qty += d;
+  if(cart[i].qty <= 0) cart.splice(i,1);
   save();
 }
 
-function removeItem(index){
-  cart.splice(index,1);
+/* REMOVE */
+function removeItem(i){
+  cart.splice(i,1);
   save();
 }
 
+/* RENDER */
 function render(){
-  let total = 0;
-  let count = 0;
+  let total=0, count=0;
+  const el=document.getElementById("cart-items");
+  el.innerHTML="";
 
-  const el = document.getElementById("cart-items");
-  el.innerHTML = "";
+  cart.forEach((i,idx)=>{
+    total+=i.price*i.qty;
+    count+=i.qty;
 
-  cart.forEach((i,index)=>{
-    total += i.price * i.qty;
-    count += i.qty;
-
-    el.innerHTML += `
+    el.innerHTML+=`
       <div>
         <strong>${i.name}</strong><br>
-        €${(i.price/100).toFixed(2)} x ${i.qty}
-        <div>
-          <button onclick="changeQty(${index},-1)">-</button>
-          <button onclick="changeQty(${index},1)">+</button>
-          <button onclick="removeItem(${index})">remove</button>
-        </div>
+        €${(i.price/100).toFixed(2)} x ${i.qty}<br>
+        <button onclick="changeQty(${idx},-1)">-</button>
+        <button onclick="changeQty(${idx},1)">+</button>
+        <button onclick="removeItem(${idx})">x</button>
       </div>
+      <hr>
     `;
   });
 
-  document.getElementById("cart-count").textContent = count;
-  document.getElementById("cart-total").textContent = (total/100).toFixed(2);
+  document.getElementById("cart-count").textContent=count;
+  document.getElementById("cart-total").textContent=(total/100).toFixed(2);
 }
 
+/* CHECKOUT (VERCEL ONLY) */
 async function checkout(){
-  const btn = document.querySelector("#cart-drawer button");
-  btn.textContent = "Redirecting...";
-  btn.disabled = true;
-
   const res = await fetch("/api/checkout", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
@@ -244,17 +279,26 @@ async function checkout(){
 
   const data = await res.json();
 
-  btn.textContent = "Checkout";
-  btn.disabled = false;
-
   if(data.url){
     window.location.href = data.url;
   } else {
-    alert("Checkout failed");
+    alert("Checkout error");
     console.log(data);
   }
 }
 
+/* MINESWEEPER SIMPLE */
+function startMinesweeper(){
+  const b=document.getElementById("board");
+  b.innerHTML="";
+  for(let i=0;i<12;i++){
+    const cell=document.createElement("button");
+    cell.textContent="□";
+    b.appendChild(cell);
+  }
+}
+
+startMinesweeper();
 render();
 </script>
 
