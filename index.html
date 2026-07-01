@@ -898,13 +898,13 @@ canvas {
 </div>      
       <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
       <p style="font-size:13px;">
-For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
+For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
     <div class="mirror-options">
   <div class="mirror-option">
     <h3>Mini Mirror</h3>
     <p>30cm × 40cm</p>
     <div class="price">€35</div>
-<button onclick="addToCart({id:'mini-mirror', name:'Mini Mirror', price:3500})">
+<button onclick="addToCart({id:'mini-mirror', name:'Mini Mirror', price:3500, shippingType:'parcel'})">
   Add Mini Mirror
 </button> 
   </div>
@@ -912,7 +912,7 @@ For the OG internet Tumblr babes. The color palette at the bottom of the mirror 
     <h3>Big Mirror</h3>
     <p>40cm × 60cm</p>
       <div class="price">€55</div>
-    <button onclick="addToCart({id:'big-mirror', name:'Big Mirror', price:5500})">
+    <button onclick="addToCart({id:'big-mirror', name:'Big Mirror', price:5500, shippingType:'parcel'})">
   Add Big Mirror
 </button>
   </div>
@@ -1504,7 +1504,6 @@ function render(){
   document.getElementById("cart-total").textContent = (total / 100).toFixed(2);
 }
 
-/* CHECKOUT (Stripe backend required) */
 async function checkout(){
   const res = await fetch("/api/checkout", {
     method: "POST",
