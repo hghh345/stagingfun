@@ -1050,7 +1050,20 @@ For the OG internet Tumblr babes. The color palette at the bottom of the mirror 
   <div class="task-pill" onclick="openWindow('cdWin')">CD Player</div>
   <div class="clock" id="clock">00:00</div>
 </div>
+  <button id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</button>
 
+<div id="cart-drawer">
+  <h3>Your Cart</h3>
+
+  <div id="cart-items"></div>
+
+  <div style="padding:6px;font-size:13px;">
+    <strong>Total: €<span id="cart-total">0.00</span></strong>
+  </div>
+
+  <button onclick="checkout()">Checkout</button>
+</div>
+      
 <script>
 let zIndex = 100;
 
@@ -1519,19 +1532,7 @@ async function checkout(){
 render();
 
 </script>
-  <button id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</button>
 
-<div id="cart-drawer">
-  <h3>Your Cart</h3>
-
-  <div id="cart-items"></div>
-
-  <div style="padding:6px;font-size:13px;">
-    <strong>Total: €<span id="cart-total">0.00</span></strong>
-  </div>
-
-  <button onclick="checkout()">Checkout</button>
-</div>
 </body>
 </html>
 
