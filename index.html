@@ -243,8 +243,13 @@ async function checkout() {
       }))
     })
   });
-
+async function checkout() {
+  const btn = document.querySelector("#cart-drawer button");
+  btn.textContent = "Redirecting...";
+  btn.disabled = true;
   const data = await res.json();
+  btn.textContent = "Checkout";
+btn.disabled = false;
 
   if (data.url) {
     window.location.href = data.url;
@@ -253,26 +258,58 @@ async function checkout() {
     console.log(data);
   }
 }
-function render(){
+function render() {
   let total = 0;
   let count = 0;
 
   const el = document.getElementById("cart-items");
   el.innerHTML = "";
 
-  cart.forEach(i => {
+  cart.forEach((i, index) => {
     total += i.price * i.qty;
     count += i.qty;
 
     el.innerHTML += `
-      <div>
-        ${i.name} - €${(i.price/100).toFixed(2)} x ${i.qty}
+      <div style="margin-bottom:10px;">
+        <div><strong>${i.name}</strong></div>
+
+        <div>€${(i.price / 100).toFixed(2)}</div>
+
+        <div style="display:flex; gap:8px; align-items:center; margin-top:5px;">
+          
+          <button onclick="changeQty(${index}, -1)">-</button>
+          
+          <span>${i.qty}</span>
+          
+          <button onclick="changeQty(${index}, 1)">+</button>
+
+          <button onclick="removeItem(${index})" style="margin-left:10px;">
+            remove
+          </button>
+
+        </div>
       </div>
     `;
   });
 
   document.getElementById("cart-count").textContent = count;
-  document.getElementById("cart-total").textContent = (total/100).toFixed(2);
+  document.getElementById("cart-total").textContent = (total / 100).toFixed(2);
+}
+  function changeQty(index, delta) {
+  cart[index].qty += delta;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  render();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  render();
 }
 
 render();
