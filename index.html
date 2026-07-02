@@ -726,6 +726,71 @@ canvas {
   font-size: 12px;
   background: #d6d6d6;
 }
+.shop-layout{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:18px;
+}
+
+.shop-sidebar{
+    background:white;
+    border:2px inset #aaa;
+    padding:12px;
+}
+
+.shop-sidebar h3{
+    margin-top:0;
+    font-size:16px;
+}
+
+.shop-object{
+    padding:10px;
+    margin-bottom:8px;
+    border:2px outset white;
+    cursor:pointer;
+    background:#ececec;
+}
+
+.shop-object:hover{
+    background:#ffeff9;
+}
+
+.shop-object.active{
+    background:#ff66cc;
+    color:white;
+}
+
+.shop-viewer{
+    background:white;
+    border:2px inset #aaa;
+    padding:18px;
+}
+
+.viewer-image{
+    width:100%;
+    max-height:280px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+#viewerVariants{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:15px 0;
+}
+
+.variant-btn{
+    border:2px outset white;
+    background:#dcdcdc;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.variant-btn.active{
+    background:#000080;
+    color:white;
+}
 
 @media (max-width: 800px) {
   body { background-attachment: scroll; }
@@ -880,31 +945,40 @@ canvas {
   </div>
 </section>
 <section class="window mirror-window" id="mirrorWin">
-  <div class="window-titlebar">
-    <span>the-coolest-object.exe</span>
-    <div class="window-buttons">
-      <button class="win-btn" onclick="minimizeWindow(event, 'mirrorWin')">_</button>
-      <button class="win-btn">□</button>
-      <button class="win-btn" onclick="closeWindow(event, 'mirrorWin')">×</button>
+<div class="window-content">
+
+  <div class="shop-layout">
+
+    <div class="shop-sidebar">
+      <h3>OBJECTS</h3>
+
+      <div id="productList"></div>
+
     </div>
+
+    <div class="shop-viewer">
+
+      <img id="viewerImage" class="viewer-image">
+
+      <h2 id="viewerTitle"></h2>
+
+      <p id="viewerDescription"></p>
+
+      <div id="viewerVariants"></div>
+
+      <div id="viewerPrice" class="price"></div>
+
+      <button
+        id="viewerAdd"
+        class="buy-btn">
+        Add to Cart
+      </button>
+
+    </div>
+
   </div>
-  <div class="window-menu"><span>Shop</span><span>Info</span><span>Customize</span><span>Help</span></div>
-  <div class="window-content">
-    <div class="mirror-card">
-<div class="mirror-photo-wrap">
-  <button class="gallery-btn prev" onclick="changeMirrorPhoto(-1)">‹</button>
-  <img id="mirrorPhoto" src="mirror1.JPG" class="mirror-photo">
-  <button class="gallery-btn next" onclick="changeMirrorPhoto(1)">›</button>
-</div>      
-      <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
-      <p style="font-size:13px;">
-For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
-<div id="productContainer"></div>
-  <div class="mirror-option">
-  </div>
-        <div class="mirror-option featured">
-      </div>
-      <p style="font-size:12px;margin:8px 0 0;">+ €10 optional customization</p>
+
+</div>
 </section>
 
 <section class="window cd-window" id="cdWin">
