@@ -1130,51 +1130,42 @@ canvas {
 let zIndex = 100;
 const PRODUCTS = [
   {
-    id: "ms-mirror",
+    id: "paint",
+
     name: "MS Paint Mirror",
+
+    icon: "🪞",
+
     image: "mirror1.JPG",
+
+    description:
+      "For the OG internet Tumblr babes. Handmade in Lisbon from lightweight mirrored acrylic.",
+
     variants: [
-      {
-        id: "tiny",
-        label: "Tiny",
-        price: 1500,
-        description: "The smallest portal version. Pocket-sized energy, made for intimate spaces."
-      },
-      {
-        id: "mini",
-        label: "Mini",
-        price: 3500,
-        description: "The original compact MS Paint Mirror. Light, playful, and nostalgic."
-      },
-      {
-        id: "big",
-        label: "Big",
-        price: 5500,
-        description: "The full-size statement mirror. A main character object for any wall."
-      },
-      {
-        id: "palestine",
-        label: "Big (Palestine Edition)",
-        price: 6500,
-        description: "Special edition with meaning embedded in the object. Same mirror, different intention."
-      }
+      { id: "tiny", label: "Tiny", price: 1500 },
+      { id: "mini", label: "Mini", price: 3500 },
+      { id: "big", label: "Big", price: 5500 },
+      { id: "palestine", label: "Palestine Edition", price: 6500 }
     ]
   },
+
   {
-    id: "ipod-mirror",
+    id: "ipod",
+
     name: "iPod Nano Mirror",
+
+    icon: "🎵",
+
     image: "ipod.JPG",
+
+    description:
+      "An object from another internet timeline.",
+
     variants: [
-      {
-        id: "standard",
-        label: "Standard",
-        price: 3500,
-        description: "A nostalgic iPod-shaped mirror object. Early internet energy in physical form."
-      }
+      { id: "standard", label: "Standard", price: 3500 }
     ]
   }
 ];
-
 function renderProducts() {
   const container = document.getElementById("productContainer");
   if (!container) return;
