@@ -1588,10 +1588,8 @@ let activeProduct = null;
 let activeVariant = null;
 function openProductWindow(productId, variantId) {
   const product = PRODUCTS.find(p => p.id === productId);
-  const variant = product.variants.find(v => v.id === variantId);
 
   activeProduct = product;
-  activeVariant = variant;
 
   let win = document.getElementById("productWin");
 
@@ -1616,22 +1614,77 @@ function openProductWindow(productId, variantId) {
     <div class="window-content">
       <img src="${product.image}" style="width:100%; max-height:220px; object-fit:cover; border:2px inset #fff;" />
 
-      <h3>${product.name} — ${variant.label}</h3>
+      <h3>${product.name}</h3>
 
-      <p style="font-size:12px; line-height:1.4;">
-        ${variant.description}
-      </p>
-
-      <div style="font-size:18px; font-weight:bold; margin:10px 0;">
-        €${(variant.price / 100).toFixed(2)}
-      </div>
-
-      <button class="tiny-btn"
-        onclick="addVariantToCart('${product.id}', '${variant.id}')">
-        Add to cart
-      </button>
+      <div id="variantButtons" style="display:grid; gap:8px; margin:10px 0;"></div>
     </div>
   `;
+
+  const variantContainer = win.querySelector("#variantButtons");
+
+  product.variants.forEach(v => {
+    const btn = document.createElement("button");
+
+    btn.className = "tiny-btn";
+    btn.innerHTML = `
+      ${v.label} — €${(v.price / 100).toFixed(2)}
+    `;
+
+    btn.onclick = () => {
+      activeVariant = v;
+
+      variantContainer.querySelectorAll("button").forEach(b => b.style.outline = "none");
+      btn.style.outline = "2px dotted #000";
+
+      // optional: show description under buttons
+      if (!win.querySelector(".variant-desc")) {
+        const desc = document.createElement("p");
+        desc.className = "variant-desc";
+        desc.style.fontSize = "12px";
+        desc.style.marginTop = "10px";
+        variantContainer.after(desc);
+      }
+
+      win.querySelector(".variant-desc").textContent = v.description;
+    };
+
+    variantContainer.appendChild(btn);
+  });
+
+  makeWindowDraggable(win);
+}
+
+function makeWindowDraggable(win) {
+  win.addEventListener("mousedown", () => bringToFront(win));
+
+  const bar = win.querySelector(".window-titlebar");
+  if (!bar) return;
+
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  bar.addEventListener("mousedown", e => {
+    if (e.target.classList.contains("win-btn")) return;
+
+    isDragging = true;
+    offsetX = e.clientX - win.offsetLeft;
+    offsetY = e.clientY - win.offsetTop;
+
+    bringToFront(win);
+  });
+
+  document.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+
+    win.style.position = "absolute";
+    win.style.left = `${e.clientX - offsetX}px`;
+    win.style.top = `${e.clientY - offsetY}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
 }
 function addVariantToCart(productId, variantId){
   const product = PRODUCTS.find(p => p.id === productId);
