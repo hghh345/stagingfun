@@ -943,42 +943,34 @@ canvas {
 
     <div id="minesweeperBoard" class="minesweeper-board"></div>
   </div>
-</section>
 <section class="window mirror-window" id="mirrorWin">
+
+<div class="window-titlebar">
+  <span>the-coolest-object.exe</span>
+
+  <div class="window-buttons">
+    <button class="win-btn" onclick="minimizeWindow(event,'mirrorWin')">_</button>
+    <button class="win-btn">□</button>
+    <button class="win-btn" onclick="closeWindow(event,'mirrorWin')">×</button>
+  </div>
+</div>
+
+<div class="window-menu">
+  <span>Shop</span>
+  <span>Products</span>
+  <span>Help</span>
+</div>
+
 <div class="window-content">
 
-  <div class="shop-layout">
+<h2 style="margin-top:0;">
+Choose an object...
+</h2>
 
-    <div class="shop-sidebar">
-      <h3>OBJECTS</h3>
-
-      <div id="productList"></div>
-
-    </div>
-
-    <div class="shop-viewer">
-
-      <img id="viewerImage" class="viewer-image">
-
-      <h2 id="viewerTitle"></h2>
-
-      <p id="viewerDescription"></p>
-
-      <div id="viewerVariants"></div>
-
-      <div id="viewerPrice" class="price"></div>
-
-      <button
-        id="viewerAdd"
-        class="buy-btn">
-        Add to Cart
-      </button>
-
-    </div>
-
-  </div>
+<div id="productList"></div>
 
 </div>
+
 </section>
 
 <section class="window cd-window" id="cdWin">
@@ -1166,28 +1158,40 @@ const PRODUCTS = [
     ]
   }
 ];
-function renderProducts() {
-  const container = document.getElementById("productContainer");
-  if (!container) return;
+function renderProducts(){
 
-  container.innerHTML = "";
+    const list = document.getElementById("productList");
 
-  PRODUCTS.forEach(product => {
-    const block = document.createElement("div");
-    block.className = "mirror-option featured";
+    if(!list) return;
 
-    block.innerHTML = `
-      <h3>${product.name}</h3>
-      <p>${product.variants.length} versions available</p>
-      <button class="tiny-btn">Open</button>
-    `;
+    list.innerHTML = "";
 
-    block.querySelector("button").onclick = () => {
-      openProductWindow(product.id, product.variants[0].id);
-    };
+    PRODUCTS.forEach(product=>{
 
-    container.appendChild(block);
-  });
+        const div = document.createElement("div");
+
+        div.className = "mirror-option";
+
+        div.style.marginBottom = "15px";
+
+        div.innerHTML = `
+            <h3>${product.name}</h3>
+
+            <p>${product.variants.length} version${product.variants.length>1?"s":""}</p>
+
+            <button class="tiny-btn">
+                Open Product
+            </button>
+        `;
+
+        div.querySelector("button").onclick = ()=>{
+            openProductWindow(product.id);
+        };
+
+        list.appendChild(div);
+
+    });
+
 }
 function bringToFront(el) {
   zIndex++;
