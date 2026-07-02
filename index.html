@@ -1198,21 +1198,98 @@ function bringToFront(el) {
   el.style.zIndex = zIndex;
 }
 
-function openWindow(id) {
-  const el = document.getElementById(id);
-  el.classList.remove("hidden");
-  bringToFront(el);
-  document.getElementById("startMenu").classList.add("hidden");
+function openProductWindow(productId){
 
-  if (id === "paintWin") {
-    setTimeout(resizeCanvas, 100);
-  }
+    const product = PRODUCTS.find(p=>p.id===productId);
 
-  if (window.innerWidth <= 800) {
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  }
+    let win = document.getElementById("productWin");
+
+    if(!win){
+
+        win=document.createElement("section");
+
+        win.id="productWin";
+
+        win.className="window";
+
+        win.style.width="480px";
+        win.style.left="340px";
+        win.style.top="120px";
+
+        document.body.appendChild(win);
+
+        makeWindowDraggable(win);
+
+    }
+
+    let variantHTML="";
+
+    product.variants.forEach((variant,index)=>{
+
+        variantHTML += `
+        <div class="mirror-option">
+
+            <h3>${variant.label}</h3>
+
+            <p>${variant.description}</p>
+
+            <div class="price">
+                €${(variant.price/100).toFixed(2)}
+            </div>
+
+            <button
+                class="tiny-btn"
+                onclick="addVariantToCart('${product.id}','${variant.id}')">
+                Add to Cart
+            </button>
+
+        </div>
+        `;
+
+    });
+
+    win.innerHTML=`
+
+    <div class="window-titlebar">
+
+        <span>${product.name}</span>
+
+        <div class="window-buttons">
+
+            <button class="win-btn"
+            onclick="closeWindow(event,'productWin')">
+
+            ×
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="window-content">
+
+        <img
+            src="${product.image}"
+            style="
+                width:100%;
+                height:220px;
+                object-fit:cover;
+                border:2px inset white;
+            ">
+
+        <h2>${product.name}</h2>
+
+        ${variantHTML}
+
+    </div>
+
+    `;
+
+    win.classList.remove("hidden");
+
+    bringToFront(win);
+
 }
 
 function closeWindow(event, id) {
