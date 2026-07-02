@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -246,28 +245,17 @@ canvas {
   top: 55px;
   left: 58%;
   transform: translateX(-50%);
-  width: 500px;
+  width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
   z-index: 120;
 }
+
 .mirror-card {
   background: white;
   border: 2px inset #aaa;
   padding: 14px;
   text-align: center;
-}
-
-.mirror-photo-wrap {
-  width: 280px;
-  height: 3600px;
-  margin: 0 auto 12px;
-  border: 10px ridge #dcdcdc;
-  border-radius: 18px 18px 55px 55px;
-  overflow: hidden;
-  position: relative;
-  background: white;
-  box-shadow:
-    0 0 18px rgba(255,0,200,.55),
-    8px 8px 0 rgba(0,0,0,.2);
 }
 
 .mirror-photo-wrap {
@@ -307,38 +295,6 @@ canvas {
   z-index: 5;
   white-space: nowrap;
 }
-  .mirror-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.mirror-option {
-  background: #f8f8f8;
-  border: 2px inset #aaa;
-  padding: 10px;
-  text-align: center;
-}
-
-.mirror-option h3 {
-  margin: 0 0 4px;
-  font-size: 15px;
-}
-
-.mirror-option p {
-  margin: 0 0 6px;
-  font-size: 12px;
-}
-
-.mirror-option.featured {
-  background: #fff4fb;
-  box-shadow: inset 0 0 0 2px #ff66cc;
-}
-
-.mirror-option .price {
-  font-size: 22px;
-}
 
 .gallery-btn {
   position: absolute;
@@ -360,6 +316,109 @@ canvas {
 
 .gallery-btn.next {
   right: -16px;
+}
+
+.product-section {
+  background: #f8f8f8;
+  border: 2px inset #aaa;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 6px;
+}
+
+.product-header h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.product-toggle-btn {
+  background: #c0c0c0;
+  border: 2px outset white;
+  padding: 3px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product-toggle-btn:active {
+  border: 2px inset white;
+}
+
+.product-content {
+  display: none;
+}
+
+.product-content.open {
+  display: block;
+}
+
+.product-desc {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.variant-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.variant-card {
+  background: white;
+  border: 2px inset #aaa;
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.variant-card h4 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+}
+
+.variant-card p {
+  margin: 0 0 6px 0;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #555;
+}
+
+.variant-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000080;
+  margin: 6px 0;
+}
+
+.add-to-cart-btn {
+  display: inline-block;
+  background: #ff00aa;
+  color: white;
+  border: 2px outset #ffc7ef;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: Tahoma, sans-serif;
+}
+
+.add-to-cart-btn:hover {
+  background: #00a651;
+}
+
+.add-to-cart-btn:active {
+  border: 2px inset #ffc7ef;
 }
 
 .price {
@@ -780,6 +839,8 @@ canvas {
   .folder-grid { grid-template-columns: 1fr; }
 
   .task-pill { display: none; }
+
+  .variant-list { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -891,20 +952,17 @@ canvas {
   <div class="window-menu"><span>Shop</span><span>Info</span><span>Customize</span><span>Help</span></div>
   <div class="window-content">
     <div class="mirror-card">
-<div class="mirror-photo-wrap">
-  <button class="gallery-btn prev" onclick="changeMirrorPhoto(-1)">‹</button>
-  <img id="mirrorPhoto" src="mirror1.JPG" class="mirror-photo">
-  <button class="gallery-btn next" onclick="changeMirrorPhoto(1)">›</button>
-</div>      
-      <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
-      <p style="font-size:13px;">
-For the OG internet Tumblr babes. The color palette at the bottom of the mirror features colors from the Pride flag. ✦ Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
-<div id="productContainer"></div>
-  <div class="mirror-option">
+      <div class="mirror-photo-wrap">
+        <button class="gallery-btn prev" onclick="changeMirrorPhoto(-1)">‹</button>
+        <img id="mirrorPhoto" src="mirror1.JPG" class="mirror-photo">
+        <button class="gallery-btn next" onclick="changeMirrorPhoto(1)">›</button>
+      </div>      
+      <h1 style="font-size:18px;margin:10px 0 5px 0;">FUNFUNFUN Shop</h1>
+      <p style="font-size:11px;margin:0 0 12px 0;line-height:1.4;">For the OG internet Tumblr babes. Each piece is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Easy to hang or wear ✦ For Pride Month, a portion of proceeds are donated to For the Gworls.</p>
+      
+      <div id="productDetails"></div>
+    </div>
   </div>
-        <div class="mirror-option featured">
-      </div>
-      <p style="font-size:12px;margin:8px 0 0;">+ €10 optional customization</p>
 </section>
 
 <section class="window cd-window" id="cdWin">
@@ -1054,76 +1112,117 @@ For the OG internet Tumblr babes. The color palette at the bottom of the mirror 
       
 <script>
 let zIndex = 100;
+
+// PRODUCTS CONFIG — Easy to add more!
 const PRODUCTS = [
   {
     id: "ms-mirror",
     name: "MS Paint Mirror",
+    description: "The color palette at the bottom features colors from the Pride flag. Each mirror is made-to-order using lightweight shatterproof acrylic.",
     image: "mirror1.JPG",
     variants: [
       {
         id: "tiny",
         label: "Tiny",
         price: 1500,
-        description: "The smallest portal version. Pocket-sized energy, made for intimate spaces."
+        description: "The smallest portal version. Pocket-sized energy."
       },
       {
         id: "mini",
         label: "Mini",
         price: 3500,
-        description: "The original compact MS Paint Mirror. Light, playful, and nostalgic."
+        description: "The original compact mirror. Light & playful."
       },
       {
         id: "big",
         label: "Big",
         price: 5500,
-        description: "The full-size statement mirror. A main character object for any wall."
+        description: "Full-size statement mirror. Main character object."
       },
       {
         id: "palestine",
         label: "Big (Palestine Edition)",
         price: 6500,
-        description: "Special edition with meaning embedded in the object. Same mirror, different intention."
+        description: "Special edition with meaning. Same mirror, different intention."
       }
     ]
   },
   {
     id: "ipod-mirror",
     name: "iPod Nano Mirror",
+    description: "A nostalgic iPod-shaped mirror object. Early internet energy in physical form.",
     image: "ipod.JPG",
     variants: [
       {
         id: "standard",
         label: "Standard",
         price: 3500,
-        description: "A nostalgic iPod-shaped mirror object. Early internet energy in physical form."
+        description: "Nostalgic iPod-shaped mirror. Retro vibes."
       }
     ]
   }
+  // ADD MORE PRODUCTS HERE IN THE FUTURE
 ];
 
 function renderProducts() {
-  const container = document.getElementById("productContainer");
+  const container = document.getElementById("productDetails");
   if (!container) return;
 
   container.innerHTML = "";
 
-  PRODUCTS.forEach(product => {
-    const block = document.createElement("div");
-    block.className = "mirror-option featured";
+  PRODUCTS.forEach((product, idx) => {
+    const section = document.createElement("div");
+    section.className = "product-section";
+    section.id = `product-${product.id}`;
 
-    block.innerHTML = `
+    const header = document.createElement("div");
+    header.className = "product-header";
+    header.innerHTML = `
       <h3>${product.name}</h3>
-      <p>${product.variants.length} versions available</p>
-      <button class="tiny-btn">Open</button>
+      <button class="product-toggle-btn" onclick="toggleProduct('${product.id}')">Open ▼</button>
     `;
 
-    block.querySelector("button").onclick = () => {
-      openProductWindow(product.id, product.variants[0].id);
-    };
+    const content = document.createElement("div");
+    content.className = "product-content";
+    content.id = `content-${product.id}`;
 
-    container.appendChild(block);
+    const desc = document.createElement("p");
+    desc.className = "product-desc";
+    desc.textContent = product.description;
+    content.appendChild(desc);
+
+    const variantList = document.createElement("div");
+    variantList.className = "variant-list";
+
+    product.variants.forEach(variant => {
+      const card = document.createElement("div");
+      card.className = "variant-card";
+      card.innerHTML = `
+        <h4>${variant.label}</h4>
+        <p>${variant.description}</p>
+        <div class="variant-price">€${(variant.price / 100).toFixed(2)}</div>
+        <button class="add-to-cart-btn" onclick="addVariantToCart('${product.id}', '${variant.id}')">
+          Add
+        </button>
+      `;
+      variantList.appendChild(card);
+    });
+
+    content.appendChild(variantList);
+    section.appendChild(header);
+    section.appendChild(content);
+    container.appendChild(section);
   });
 }
+
+function toggleProduct(productId) {
+  const content = document.getElementById(`content-${productId}`);
+  const btn = document.querySelector(`#product-${productId} .product-toggle-btn`);
+  
+  content.classList.toggle("open");
+  btn.textContent = content.classList.contains("open") ? "Close ▲" : "Open ▼";
+}
+
 function bringToFront(el) {
   zIndex++;
   el.style.zIndex = zIndex;
@@ -1235,7 +1334,7 @@ function playSong() {
   if (song.paused) song.play();
   else song.pause();
 }
-  const mirrorPhotos = [
+const mirrorPhotos = [
   "mirror1.JPG",
   "mirror5.JPG",
   "mirror4.JPG",
@@ -1584,55 +1683,7 @@ async function checkout(){
     console.log(data);
   }
 }
-let activeProduct = null;
-let activeVariant = null;
-function openProductWindow(productId, variantId) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  const variant = product.variants.find(v => v.id === variantId);
 
-  activeProduct = product;
-  activeVariant = variant;
-
-  let win = document.getElementById("productWin");
-
-  if (!win) {
-    win = document.createElement("section");
-    win.className = "window";
-    win.id = "productWin";
-    document.body.appendChild(win);
-  }
-
-  win.classList.remove("hidden");
-  bringToFront(win);
-
-  win.innerHTML = `
-    <div class="window-titlebar">
-      <span>${product.name}</span>
-      <div class="window-buttons">
-        <button class="win-btn" onclick="closeWindow(event, 'productWin')">×</button>
-      </div>
-    </div>
-
-    <div class="window-content">
-      <img src="${product.image}" style="width:100%; max-height:220px; object-fit:cover; border:2px inset #fff;" />
-
-      <h3>${product.name} — ${variant.label}</h3>
-
-      <p style="font-size:12px; line-height:1.4;">
-        ${variant.description}
-      </p>
-
-      <div style="font-size:18px; font-weight:bold; margin:10px 0;">
-        €${(variant.price / 100).toFixed(2)}
-      </div>
-
-      <button class="tiny-btn"
-        onclick="addVariantToCart('${product.id}', '${variant.id}')">
-        Add to cart
-      </button>
-    </div>
-  `;
-}
 function addVariantToCart(productId, variantId){
   const product = PRODUCTS.find(p => p.id === productId);
   const variant = product.variants.find(v => v.id === variantId);
@@ -1659,4 +1710,3 @@ render();
 
 </body>
 </html>
-
